@@ -15,7 +15,7 @@ public class DP {
      */
     public static int maxProfit(int[] prices){
         int maxPro = 0;
-        int minPrice = Integer.MIN_VALUE;
+        int minPrice = Integer.MAX_VALUE;
 
         for(int i = 1;i < prices.length;i++){
             if(prices[i] < minPrice){
