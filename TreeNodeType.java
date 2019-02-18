@@ -490,4 +490,31 @@ public class TreeNodeType {
 
         return root;
     }
+    
+        /**
+     * 二叉树的层平均值
+     * @param root
+     * @return
+     */
+    public List<Double> averageOfLevels(TreeNode root) {
+        List<Double> res = new ArrayList<Double>();
+        if(root == null)
+            return res;
+        Queue<TreeNode> queue = new LinkedList<TreeNode>();
+        queue.add(root);
+        while(!queue.isEmpty()){
+            int size = queue.size();
+            int count = size;
+            double sum = 0.0;
+            while(size > 0){
+                TreeNode node = queue.poll();
+                sum += node.val;
+                if(node.left != null) queue.add(node.left);
+                if(node.right != null) queue.add(node.right);
+                size--;
+            }
+            res.add(sum/count);
+        }
+        return res;
+    }
 }
