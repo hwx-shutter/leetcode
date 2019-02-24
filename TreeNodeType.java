@@ -517,4 +517,46 @@ public class TreeNodeType {
         }
         return res;
     }
+    
+    /**
+     * 二叉树中和为某一值的路径
+     * @param root
+     * @param expectedSum
+     * @return
+     */
+    public List<List<Integer>> findPath(TreeNode root, int expectedSum){
+        List<List<Integer>> pathList = new ArrayList<>();
+        
+        if(root == null){
+            return pathList;
+        }
+        
+        Stack<Integer> path = new Stack<>();
+        findPathHelper(root, expectedSum, path, pathList);
+        
+        return pathList;
+    }
+    
+    private void findPathHelper(TreeNode root, int expectedSum, Stack<Integer> path, List<List<Integer>> pathList){
+        if(root == null){
+            return;
+        }
+        
+        if(root.left == null && root.right == null){
+            if(root.val == expectedSum){
+                List<Integer> list = new ArrayList<>();
+                for(int value : path){
+                    list.add(value);
+                }
+                list.add(root.val);
+                pathList.add(list);
+            }
+        }else{
+            path.push(root.val);
+            findPathHelper(root.left, expectedSum - root.val, path, pathList);
+            findPathHelper(root.right, expectedSum - root.val, path, pathList);
+            
+            path.pop();
+        }
+    }
 }
